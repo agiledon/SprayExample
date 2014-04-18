@@ -12,7 +12,7 @@ class CustomerServiceActor extends Actor with CustomerService with CustomerReque
   def receive = runRoute(customerRoute)
 
   def handleRequest(message: RequestMessage): Route =
-    ctx => customerRequest(ctx, Props[ItemActor], message)
+    ctx => customerRequest(ctx, Props[CustomerActor], message)
 }
 
 trait CustomerService extends HttpService with Json4sSupport {

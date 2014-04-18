@@ -4,7 +4,7 @@ import java.util.Date
 import akka.actor.Actor
 import akka.event.Logging
 
-trait ItemOperations {
+trait CustomerOperations {
 
   def getById(id: Long) = {
     OneCustomer(new Customer(id, new Date(1000), "item1"))
@@ -30,21 +30,12 @@ trait ItemOperations {
     Created("")
   }
 
-  /**
-   * modify an existing TodoItem
-   *
-   * @param item the item to modify
-   * @return the modified item
-   */
-  def update (item: Customer) = {
-    getById(item.id)
+  def update (customer: Customer) = {
+    getById(customer.id)
   }
 }
 
-/**
- * Actor to provide the Operations on TodoItems
- */
-class ItemActor extends Actor with ItemOperations{
+class CustomerActor extends Actor with CustomerOperations{
   val log = Logging(context.system, this)
   def receive = {
     case GetCustomer(id) => sender ! getById(id)
